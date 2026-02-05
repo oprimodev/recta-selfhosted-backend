@@ -1,0 +1,1776 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: Recta Backend API
+meta:
+  id: fld_root
+  created: 1704547200000
+  modified: 1704547200000
+  description: Personal finance backend API collection
+collection:
+  - url: "{{ _.base_url }}/health"
+    name: Health Check
+    meta:
+      id: req_health
+      created: 1704547200000
+      modified: 1704547200000
+      isPrivate: false
+      description: Check if the API is running
+      sortKey: -1704547200000
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.2.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - name: 🔐 Authentication
+    meta:
+      id: fld_auth
+      created: 1704547200000
+      modified: 1704547200000
+      description: Authentication endpoints
+      sortKey: -1704547200000
+    children:
+      - url: "{{ _.base_url }}/auth/me"
+        name: Get Current User
+        meta:
+          id: req_auth_me
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Get current user info and households
+          sortKey: -1704547200000
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: Firebase ID Token
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/auth/sync"
+        name: Sync Firebase User
+        meta:
+          id: req_auth_sync
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Sync Firebase user with database
+          sortKey: -1704547200001
+        method: POST
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: Firebase ID Token
+            disabled: false
+          - name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: 👤 Users
+    meta:
+      id: fld_users
+      created: 1704547200000
+      modified: 1704547200000
+      description: User management endpoints
+      sortKey: -1704547200001
+    children:
+      - url: "{{ _.base_url }}/users/me"
+        name: Get My Profile
+        meta:
+          id: req_users_me
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Get current user info and preferences
+          sortKey: -1704547200000
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/users/me/preferences"
+        name: Update Preferences
+        meta:
+          id: req_users_preferences
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Update user preferences
+          sortKey: -1704547200001
+        method: PUT
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+          - name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "displayName": "John Doe",
+              "theme": "dark",
+              "baseCurrency": "BRL",
+              "locale": "pt-BR",
+              "country": "BR",
+              "onboardingCompleted": true
+            }
+      - url: "{{ _.base_url }}/users/me/referral-code"
+        name: Get Referral Code
+        meta:
+          id: req_users_referral
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Get or create referral code
+          sortKey: -1704547200002
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: 🏠 Households
+    meta:
+      id: fld_households
+      created: 1704547200000
+      modified: 1704547200000
+      description: Household management endpoints
+      sortKey: -1704547200002
+    children:
+      - url: "{{ _.base_url }}/households"
+        name: List Households
+        meta:
+          id: req_households_list
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: List user's households
+          sortKey: -1704547200000
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/households"
+        name: Create Household
+        meta:
+          id: req_households_create
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Create a new household
+          sortKey: -1704547200001
+        method: POST
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+          - name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "name": "My Family"
+            }
+      - url: "{{ _.base_url }}/households/{{ _.household_id }}"
+        name: Get Household
+        meta:
+          id: req_households_get
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Get household details
+          sortKey: -1704547200002
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/households/{{ _.household_id }}"
+        name: Update Household
+        meta:
+          id: req_households_update
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Update household (OWNER only)
+          sortKey: -1704547200003
+        method: PATCH
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+          - name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "name": "Updated Household Name"
+            }
+      - url: "{{ _.base_url }}/households/{{ _.household_id }}"
+        name: Delete Household
+        meta:
+          id: req_households_delete
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Delete household (OWNER only)
+          sortKey: -1704547200004
+        method: DELETE
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/households/{{ _.household_id }}/invite"
+        name: Invite Member
+        meta:
+          id: req_households_invite
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Invite member to household (OWNER only)
+          sortKey: -1704547200005
+        method: POST
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+          - name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "email": "member@example.com",
+              "role": "EDITOR"
+            }
+      - url: "{{ _.base_url }}/households/{{ _.household_id }}/members"
+        name: List Members
+        meta:
+          id: req_households_members
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: List household members
+          sortKey: -1704547200006
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/households/{{ _.household_id }}/members/{{ _.member_id }}"
+        name: Update Member Role
+        meta:
+          id: req_households_member_update
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Update member role (OWNER only)
+          sortKey: -1704547200007
+        method: PATCH
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+          - name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "role": "EDITOR"
+            }
+      - url: "{{ _.base_url }}/households/{{ _.household_id }}/members/{{ _.member_id }}"
+        name: Remove Member
+        meta:
+          id: req_households_member_delete
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Remove member from household (OWNER only)
+          sortKey: -1704547200008
+        method: DELETE
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: 💰 Accounts
+    meta:
+      id: fld_accounts
+      created: 1704547200000
+      modified: 1704547200000
+      description: Account management endpoints
+      sortKey: -1704547200003
+    children:
+      - url: "{{ _.base_url }}/accounts?householdId={{ _.household_id }}"
+        name: List Accounts
+        meta:
+          id: req_accounts_list
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: List accounts for a household
+          sortKey: -1704547200000
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/accounts/summary?householdId={{ _.household_id }}"
+        name: Get Accounts Summary
+        meta:
+          id: req_accounts_summary
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Get account summary by currency
+          sortKey: -1704547200001
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/accounts"
+        name: Create Account
+        meta:
+          id: req_accounts_create
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Create a new account (EDITOR+)
+          sortKey: -1704547200002
+        method: POST
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+          - name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "householdId": "{{ _.household_id }}",
+              "name": "Conta Corrente",
+              "type": "CHECKING",
+              "balance": 1000.00,
+              "currency": "BRL",
+              "color": "#3B82F6",
+              "icon": "wallet"
+            }
+      - url: "{{ _.base_url }}/accounts/{{ _.account_id }}"
+        name: Get Account
+        meta:
+          id: req_accounts_get
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Get account details
+          sortKey: -1704547200003
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/accounts/{{ _.account_id }}"
+        name: Update Account
+        meta:
+          id: req_accounts_update
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Update account (EDITOR+)
+          sortKey: -1704547200004
+        method: PATCH
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+          - name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "name": "Updated Account Name",
+              "color": "#10B981",
+              "isActive": true
+            }
+      - url: "{{ _.base_url }}/accounts/{{ _.account_id }}"
+        name: Delete Account
+        meta:
+          id: req_accounts_delete
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Delete account (EDITOR+)
+          sortKey: -1704547200005
+        method: DELETE
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/accounts/transfer"
+        name: Transfer Between Accounts
+        meta:
+          id: req_accounts_transfer
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Transfer money between accounts (EDITOR+)
+          sortKey: -1704547200006
+        method: POST
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+          - name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "fromAccountId": "{{ _.account_id }}",
+              "toAccountId": "{{ _.account_id_2 }}",
+              "amount": 100.00,
+              "description": "Transferência entre contas"
+            }
+      - url: "{{ _.base_url }}/accounts/{{ _.account_id }}/adjust-balance"
+        name: Adjust Balance
+        meta:
+          id: req_accounts_adjust
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Manually adjust account balance (EDITOR+)
+          sortKey: -1704547200007
+        method: POST
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+          - name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "newBalance": 1500.00,
+              "reason": "Ajuste manual"
+            }
+  - name: 📁 Categories
+    meta:
+      id: fld_categories
+      created: 1704547200000
+      modified: 1704547200000
+      description: Category management endpoints
+      sortKey: -1704547200004
+    children:
+      - url: "{{ _.base_url }}/categories?householdId={{ _.household_id }}"
+        name: List Categories
+        meta:
+          id: req_categories_list
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: List categories for a household
+          sortKey: -1704547200000
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/categories"
+        name: Create Category
+        meta:
+          id: req_categories_create
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Create a new category (EDITOR+)
+          sortKey: -1704547200001
+        method: POST
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+          - name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "householdId": "{{ _.household_id }}",
+              "name": "Alimentação",
+              "type": "EXPENSE",
+              "icon": "food",
+              "color": "#EF4444"
+            }
+      - url: "{{ _.base_url }}/categories/{{ _.category_id }}"
+        name: Get Category
+        meta:
+          id: req_categories_get
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Get category details
+          sortKey: -1704547200002
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/categories/{{ _.category_id }}"
+        name: Update Category
+        meta:
+          id: req_categories_update
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Update category (EDITOR+)
+          sortKey: -1704547200003
+        method: PATCH
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+          - name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "name": "Alimentação Atualizada",
+              "color": "#F59E0B"
+            }
+      - url: "{{ _.base_url }}/categories/{{ _.category_id }}"
+        name: Delete Category
+        meta:
+          id: req_categories_delete
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Delete category (EDITOR+)
+          sortKey: -1704547200004
+        method: DELETE
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: 💸 Transactions
+    meta:
+      id: fld_transactions
+      created: 1704547200000
+      modified: 1704547200000
+      description: Transaction management endpoints
+      sortKey: -1704547200005
+    children:
+      - url: "{{ _.base_url }}/transactions?householdId={{ _.household_id }}&limit=20"
+        name: List Transactions
+        meta:
+          id: req_transactions_list
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: List transactions with filters and pagination
+          sortKey: -1704547200000
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/transactions/summary?householdId={{ _.household_id }}&month=2024-01"
+        name: Get Summary
+        meta:
+          id: req_transactions_summary
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Get income/expense summary for a period
+          sortKey: -1704547200001
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/transactions/by-category?householdId={{ _.household_id }}&month=2024-01"
+        name: Spending by Category
+        meta:
+          id: req_transactions_by_category
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Get spending breakdown by category
+          sortKey: -1704547200002
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/transactions"
+        name: Create Transaction
+        meta:
+          id: req_transactions_create
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Create a new transaction (EDITOR+)
+          sortKey: -1704547200003
+        method: POST
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+          - name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "householdId": "{{ _.household_id }}",
+              "accountId": "{{ _.account_id }}",
+              "categoryId": "{{ _.category_id }}",
+              "amount": -50.00,
+              "description": "Compra no supermercado",
+              "date": "2024-01-15T00:00:00.000Z",
+              "paid": true
+            }
+      - url: "{{ _.base_url }}/transactions/{{ _.transaction_id }}"
+        name: Get Transaction
+        meta:
+          id: req_transactions_get
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Get transaction details
+          sortKey: -1704547200004
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/transactions/{{ _.transaction_id }}"
+        name: Update Transaction
+        meta:
+          id: req_transactions_update
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Update transaction (EDITOR+)
+          sortKey: -1704547200005
+        method: PATCH
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+          - name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "amount": -75.00,
+              "description": "Compra atualizada"
+            }
+      - url: "{{ _.base_url }}/transactions/{{ _.transaction_id }}"
+        name: Delete Transaction
+        meta:
+          id: req_transactions_delete
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Delete transaction (EDITOR+)
+          sortKey: -1704547200006
+        method: DELETE
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/transactions/batch"
+        name: Batch Create Transactions
+        meta:
+          id: req_transactions_batch_create
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Create multiple transactions at once (EDITOR+)
+          sortKey: -1704547200007
+        method: POST
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+          - name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "householdId": "{{ _.household_id }}",
+              "transactions": [
+                {
+                  "accountId": "{{ _.account_id }}",
+                  "categoryId": "{{ _.category_id }}",
+                  "amount": -30.00,
+                  "description": "Transação 1",
+                  "date": "2024-01-15T00:00:00.000Z",
+                  "paid": true
+                },
+                {
+                  "accountId": "{{ _.account_id }}",
+                  "categoryId": "{{ _.category_id }}",
+                  "amount": -20.00,
+                  "description": "Transação 2",
+                  "date": "2024-01-16T00:00:00.000Z",
+                  "paid": true
+                }
+              ]
+            }
+      - url: "{{ _.base_url }}/transactions/batch"
+        name: Batch Delete Transactions
+        meta:
+          id: req_transactions_batch_delete
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Delete multiple transactions (EDITOR+)
+          sortKey: -1704547200008
+        method: DELETE
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+          - name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "householdId": "{{ _.household_id }}",
+              "transactionIds": [
+                "{{ _.transaction_id }}",
+                "{{ _.transaction_id_2 }}"
+              ]
+            }
+  - name: 📊 Budgets
+    meta:
+      id: fld_budgets
+      created: 1704547200000
+      modified: 1704547200000
+      description: Budget management endpoints
+      sortKey: -1704547200006
+    children:
+      - url: "{{ _.base_url }}/budgets?householdId={{ _.household_id }}&month=2024-01"
+        name: List Budgets
+        meta:
+          id: req_budgets_list
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: List budgets for a household and month
+          sortKey: -1704547200000
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/budgets"
+        name: Create Budget
+        meta:
+          id: req_budgets_create
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Create a new budget (EDITOR+)
+          sortKey: -1704547200001
+        method: POST
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+          - name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "householdId": "{{ _.household_id }}",
+              "categoryId": "{{ _.category_id }}",
+              "monthlyLimit": 1000.00,
+              "month": "2024-01-01T00:00:00.000Z",
+              "type": "EXPENSE"
+            }
+      - url: "{{ _.base_url }}/budgets/{{ _.budget_id }}"
+        name: Get Budget
+        meta:
+          id: req_budgets_get
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Get budget details with progress
+          sortKey: -1704547200002
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/budgets/{{ _.budget_id }}"
+        name: Update Budget
+        meta:
+          id: req_budgets_update
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Update budget (EDITOR+)
+          sortKey: -1704547200003
+        method: PATCH
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+          - name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "monthlyLimit": 1500.00
+            }
+      - url: "{{ _.base_url }}/budgets/{{ _.budget_id }}"
+        name: Delete Budget
+        meta:
+          id: req_budgets_delete
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Delete budget (EDITOR+)
+          sortKey: -1704547200004
+        method: DELETE
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: 🎯 Savings Goals
+    meta:
+      id: fld_savings_goals
+      created: 1704547200000
+      modified: 1704547200000
+      description: Savings goals management endpoints
+      sortKey: -1704547200007
+    children:
+      - url: "{{ _.base_url }}/savings-goals?householdId={{ _.household_id }}"
+        name: List Savings Goals
+        meta:
+          id: req_savings_goals_list
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: List savings goals for a household
+          sortKey: -1704547200000
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/savings-goals"
+        name: Create Savings Goal
+        meta:
+          id: req_savings_goals_create
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Create a new savings goal (EDITOR+)
+          sortKey: -1704547200001
+        method: POST
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+          - name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "householdId": "{{ _.household_id }}",
+              "accountId": "{{ _.account_id }}",
+              "name": "Viagem para Europa",
+              "targetAmount": 10000.00,
+              "currentAmount": 0.00,
+              "targetDate": "2024-12-31T00:00:00.000Z"
+            }
+      - url: "{{ _.base_url }}/savings-goals/{{ _.savings_goal_id }}"
+        name: Get Savings Goal
+        meta:
+          id: req_savings_goals_get
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Get savings goal details
+          sortKey: -1704547200002
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/savings-goals/{{ _.savings_goal_id }}"
+        name: Update Savings Goal
+        meta:
+          id: req_savings_goals_update
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Update savings goal (EDITOR+)
+          sortKey: -1704547200003
+        method: PATCH
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+          - name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "name": "Viagem Atualizada",
+              "targetAmount": 12000.00,
+              "currentAmount": 5000.00
+            }
+      - url: "{{ _.base_url }}/savings-goals/{{ _.savings_goal_id }}"
+        name: Delete Savings Goal
+        meta:
+          id: req_savings_goals_delete
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Delete savings goal (EDITOR+)
+          sortKey: -1704547200004
+        method: DELETE
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/savings-goals/{{ _.savings_goal_id }}/add"
+        name: Add to Savings Goal
+        meta:
+          id: req_savings_goals_add
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Add amount to savings goal (EDITOR+)
+          sortKey: -1704547200005
+        method: POST
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+          - name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "amount": 500.00
+            }
+  - name: 🔄 Recurring Transactions
+    meta:
+      id: fld_recurring
+      created: 1704547200000
+      modified: 1704547200000
+      description: Recurring transaction management endpoints
+      sortKey: -1704547200008
+    children:
+      - url: "{{ _.base_url }}/recurring-transactions?householdId={{ _.household_id }}"
+        name: List Recurring Transactions
+        meta:
+          id: req_recurring_list
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: List recurring transactions for a household
+          sortKey: -1704547200000
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/recurring-transactions"
+        name: Create Recurring Transaction
+        meta:
+          id: req_recurring_create
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Create a new recurring transaction (EDITOR+)
+          sortKey: -1704547200001
+        method: POST
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+          - name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "householdId": "{{ _.household_id }}",
+              "accountId": "{{ _.account_id }}",
+              "categoryId": "{{ _.category_id }}",
+              "amount": -100.00,
+              "description": "Aluguel",
+              "frequency": "MONTHLY",
+              "startDate": "2024-01-01T00:00:00.000Z",
+              "endDate": null,
+              "isActive": true
+            }
+      - url: "{{ _.base_url }}/recurring-transactions/{{ _.recurring_transaction_id }}"
+        name: Get Recurring Transaction
+        meta:
+          id: req_recurring_get
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Get recurring transaction details
+          sortKey: -1704547200002
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/recurring-transactions/{{ _.recurring_transaction_id }}"
+        name: Update Recurring Transaction
+        meta:
+          id: req_recurring_update
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Update recurring transaction (EDITOR+)
+          sortKey: -1704547200003
+        method: PATCH
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+          - name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "amount": -120.00,
+              "isActive": false
+            }
+      - url: "{{ _.base_url }}/recurring-transactions/{{ _.recurring_transaction_id }}"
+        name: Delete Recurring Transaction
+        meta:
+          id: req_recurring_delete
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Delete recurring transaction (EDITOR+)
+          sortKey: -1704547200004
+        method: DELETE
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: 💳 Payments (Stripe)
+    meta:
+      id: fld_payments
+      created: 1704547200000
+      modified: 1704547200000
+      description: Stripe payment integration endpoints
+      sortKey: -1704547200009
+    children:
+      - url: "{{ _.base_url }}/payments/intents"
+        name: Create Payment Intent
+        meta:
+          id: req_payments_intent_create
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Create a Stripe payment intent
+          sortKey: -1704547200000
+        method: POST
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+          - name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "amount": 100.00,
+              "currency": "usd",
+              "description": "Premium subscription",
+              "metadata": {
+                "userId": "user-123"
+              }
+            }
+      - url: "{{ _.base_url }}/payments/intents/{{ _.payment_intent_id }}"
+        name: Get Payment Intent
+        meta:
+          id: req_payments_intent_get
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Get payment intent details
+          sortKey: -1704547200001
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/payments/intents"
+        name: List Payment Intents
+        meta:
+          id: req_payments_intent_list
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: List payment intents
+          sortKey: -1704547200002
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/payments/customers"
+        name: Create Customer
+        meta:
+          id: req_payments_customer_create
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Create a Stripe customer
+          sortKey: -1704547200003
+        method: POST
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+          - name: Content-Type
+            value: application/json
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "email": "customer@example.com",
+              "name": "John Doe",
+              "metadata": {
+                "userId": "user-123"
+              }
+            }
+      - url: "{{ _.base_url }}/payments/customers/{{ _.customer_id }}"
+        name: Get Customer
+        meta:
+          id: req_payments_customer_get
+          created: 1704547200000
+          modified: 1704547200000
+          isPrivate: false
+          description: Get customer details
+          sortKey: -1704547200004
+        method: GET
+        headers:
+          - name: Authorization
+            value: Bearer {{ _.firebase_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_default
+    created: 1767707506052
+    modified: 1767707506052
+environments:
+  name: Base Environment
+  meta:
+    id: env_base
+    created: 1767707506052
+    modified: 1767707506052
+    isPrivate: false
+  data:
+    base_url: http://localhost:3000
+    firebase_token: YOUR_FIREBASE_ID_TOKEN_HERE
+    household_id: YOUR_HOUSEHOLD_ID_HERE
+    account_id: YOUR_ACCOUNT_ID_HERE
+    account_id_2: YOUR_SECOND_ACCOUNT_ID_HERE
+    category_id: YOUR_CATEGORY_ID_HERE
+    transaction_id: YOUR_TRANSACTION_ID_HERE
+    transaction_id_2: YOUR_SECOND_TRANSACTION_ID_HERE
+    budget_id: YOUR_BUDGET_ID_HERE
+    savings_goal_id: YOUR_SAVINGS_GOAL_ID_HERE
+    recurring_transaction_id: YOUR_RECURRING_TRANSACTION_ID_HERE
+    payment_intent_id: YOUR_PAYMENT_INTENT_ID_HERE
+    customer_id: YOUR_CUSTOMER_ID_HERE
+    member_id: YOUR_MEMBER_ID_HERE

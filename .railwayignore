@@ -1,0 +1,46 @@
+# Railway ignore file - similar to .gitignore but for Railway uploads
+# Files/directories listed here won't be uploaded to Railway
+
+# Dependencies (will be installed on Railway)
+node_modules/
+
+# Build output (will be generated on Railway)
+dist/
+
+# Development files
+*.log
+.DS_Store
+.env.local
+.env.development
+
+# Docker files (not needed for native deploy)
+Dockerfile
+docker-compose.yml
+docker-compose.prod.yml
+.dockerignore
+
+# Documentation
+*.md
+!README.md
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Test files
+**/__tests__/
+**/*.test.ts
+**/*.spec.ts
+
+# Insomnia files
+insomnia-collection.json
+insomnia-collection.yaml
+INSOMNIA_*.md
+
+# Other
+convert-to-insomnia-yaml.js
+firebase-service-account.json
+

@@ -1,0 +1,504 @@
+// Prisma schema for Recta - Personal Finance Backend
+// Designed for PostgreSQL with explicit authorization model
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ============================================================================
+// USER & AUTHENTICATION
+// ============================================================================
+
+model User {
+  id          String   @id @default(uuid()) @db.Uuid
+  firebaseUid String   @unique @map("firebase_uid")
+  email       String   @unique
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  // User preferences
+  displayName                 String?   @map("display_name")
+  isPremium                   Boolean   @default(true) @map("is_premium")
+  onboardingCompleted         Boolean   @default(false) @map("onboarding_completed")
+  onboardingRestartedAt       DateTime? @map("onboarding_restarted_at")
+  theme                       String?   @default("light") // 'light' | 'dark'
+  baseCurrency                String?   @default("BRL") @map("base_currency") @db.VarChar(3)
+  locale                      String?   @default("pt-BR") @db.VarChar(10)
+  country                     String?   @db.VarChar(2)
+  referralCode                String?   @map("referral_code") @db.VarChar(20)
+  dashboardPreferences        Json?     @map("dashboard_preferences")
+  lastRecurringProcessedMonth String?   @map("last_recurring_processed_month") @db.VarChar(7)
+  lastRecurringProcessedAt    DateTime? @map("last_recurring_processed_at")
+  preferencesUpdatedAt        DateTime? @map("preferences_updated_at")
+
+  // Relations
+  householdMembers         HouseholdMember[]
+  householdInvitesSent     HouseholdInvite[] @relation("Inviter")
+  householdInvitesReceived HouseholdInvite[] @relation("Invitee")
+  referralsAsReferrer      Referral[]        @relation("Referrer")
+  referralsAsReferred      Referral?         @relation("Referred")
+  notifications            Notification[]
+  transactionSplits        TransactionSplit[]
+
+  @@map("users")
+}
+
+// ============================================================================
+// HOUSEHOLD & MEMBERSHIP
+// ============================================================================
+
+enum HouseholdRole {
+  OWNER
+  EDITOR
+  VIEWER
+}
+
+model Household {
+  id        String   @id @default(uuid()) @db.Uuid
+  name      String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  members               HouseholdMember[]
+  invites               HouseholdInvite[]
+  accounts              Account[]
+  categories            Category[]
+  transactions          Transaction[]
+  budgets               Budget[]
+  savingsGoals          SavingsGoal[]
+  recurringTransactions RecurringTransaction[]
+
+  @@map("households")
+}
+
+model HouseholdMember {
+  id          String        @id @default(uuid()) @db.Uuid
+  householdId String        @map("household_id") @db.Uuid
+  userId      String        @map("user_id") @db.Uuid
+  role        HouseholdRole @default(VIEWER)
+  allowPersonalAccountAccess Boolean @default(false) @map("allow_personal_account_access") // Allows other members to use this member's personal accounts in shared household transactions
+  sharedAccountIds Json?     @default("[]") @map("shared_account_ids") // Array of account IDs that this member has specifically chosen to share (overrides allowPersonalAccountAccess when provided)
+  createdAt   DateTime      @default(now()) @map("created_at")
+  updatedAt   DateTime      @updatedAt @map("updated_at")
+
+  // Relations
+  household Household @relation(fields: [householdId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Indexes
+  @@unique([householdId, userId])
+  @@index([householdId])
+  @@index([userId])
+  @@map("household_members")
+}
+
+enum InviteStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  EXPIRED
+}
+
+model HouseholdInvite {
+  id          String        @id @default(uuid()) @db.Uuid
+  householdId String        @map("household_id") @db.Uuid
+  inviterId   String        @map("inviter_id") @db.Uuid
+  inviteeId   String?       @map("invitee_id") @db.Uuid
+  email       String
+  role        HouseholdRole @default(VIEWER)
+  status      InviteStatus  @default(PENDING)
+  expiresAt   DateTime      @map("expires_at")
+  createdAt   DateTime      @default(now()) @map("created_at")
+  updatedAt   DateTime      @updatedAt @map("updated_at")
+  acceptedAt  DateTime?     @map("accepted_at")
+  rejectedAt  DateTime?     @map("rejected_at")
+
+  // Relations
+  household Household @relation(fields: [householdId], references: [id], onDelete: Cascade)
+  inviter   User      @relation("Inviter", fields: [inviterId], references: [id], onDelete: Cascade)
+  invitee   User?     @relation("Invitee", fields: [inviteeId], references: [id], onDelete: Cascade)
+
+  // Indexes
+  @@unique([householdId, email, status])
+  @@index([inviteeId])
+  @@index([householdId])
+  @@index([status])
+  @@map("household_invites")
+}
+
+// ============================================================================
+// FINANCIAL ENTITIES
+// ============================================================================
+
+enum AccountType {
+  CHECKING
+  SAVINGS
+  CREDIT
+  CASH
+  INVESTMENT
+}
+
+model Account {
+  id               String        @id @default(uuid()) @db.Uuid
+  householdId      String        @map("household_id") @db.Uuid
+  name             String
+  type             AccountType
+  balance          Decimal       @default(0) @db.Decimal(15, 2) // Mantido para compatibilidade (será total_balance)
+  currency         String        @default("BRL") @db.VarChar(3)
+  isActive         Boolean       @default(true) @map("is_active")
+  status           AccountStatus @default(ACTIVE)
+  color            String?       @db.VarChar(7) // Hex color
+  icon             String? // Icon identifier
+  // Balance fields - separação de saldos
+  totalBalance     Decimal       @default(0) @map("total_balance") @db.Decimal(15, 2) // Saldo total (available + allocated)
+  availableBalance Decimal       @default(0) @map("available_balance") @db.Decimal(15, 2) // Saldo disponível para uso
+  allocatedBalance Decimal       @default(0) @map("allocated_balance") @db.Decimal(15, 2) // Saldo alocado como garantia
+  // Credit card specific fields
+  creditLimit      Decimal?      @map("credit_limit") @db.Decimal(15, 2) // Limite total do cartão
+  totalLimit       Decimal?      @map("total_limit") @db.Decimal(15, 2) // Limite total (creditLimit + allocatedBalance)
+  availableLimit   Decimal?      @map("available_limit") @db.Decimal(15, 2) // Limite disponível (totalLimit - dívida atual)
+  dueDay           Int?          @map("due_day") // Day of month (1-31) - vencimento da fatura
+  closingDay       Int?          @map("closing_day") // Day of month (1-31) - fechamento da fatura
+  linkedAccountId  String?       @map("linked_account_id") @db.Uuid // Conta bancária vinculada (para herdar cor)
+  createdAt        DateTime      @default(now()) @map("created_at")
+  updatedAt        DateTime      @updatedAt @map("updated_at")
+
+  // Relations
+  household             Household              @relation(fields: [householdId], references: [id], onDelete: Cascade)
+  linkedAccount         Account?               @relation("LinkedAccount", fields: [linkedAccountId], references: [id], onDelete: SetNull)
+  linkedCreditCards     Account[]              @relation("LinkedAccount") // Cartões vinculados a esta conta
+  transactions          Transaction[]          @relation("TransactionAccount")
+  fromTransactions      Transaction[]          @relation("TransactionFromAccount")
+  toTransactions        Transaction[]          @relation("TransactionToAccount")
+  relatedTransactions   Transaction[]          @relation("TransactionRelatedAccount")
+  recurringTransactions RecurringTransaction[]
+  savingsGoals          SavingsGoal[]
+
+  // Indexes
+  @@index([householdId])
+  @@map("accounts")
+}
+
+enum CategoryType {
+  INCOME
+  EXPENSE
+}
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+  TRANSFER
+  ALLOCATION
+}
+
+enum AccountStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum CategoryName {
+  // Income categories
+  SALARY
+  FREELANCE
+  INVESTMENTS
+  SALES
+  RENTAL_INCOME
+  OTHER_INCOME
+
+  // Expense categories
+  FOOD
+  TRANSPORTATION
+  HOUSING
+  HEALTHCARE
+  EDUCATION
+  ENTERTAINMENT
+  CLOTHING
+  UTILITIES
+  SUBSCRIPTIONS
+  ONLINE_SHOPPING
+  GROCERIES
+  RESTAURANT
+  FUEL
+  PHARMACY
+  OTHER_EXPENSES
+
+  // Internal movement categories
+  TRANSFER
+  ALLOCATION
+}
+
+// User-created categories (custom). System categories use CategoryName enum.
+// categoryName in Transaction/Budget/Recurring: enum value (e.g. FOOD) or "CUSTOM:<id>"
+model Category {
+  id          String       @id @default(uuid()) @db.Uuid
+  householdId String       @map("household_id") @db.Uuid
+  name        String       @db.VarChar(100)
+  type        CategoryType // INCOME or EXPENSE only
+  icon        String?      @db.VarChar(50)
+  color       String?      @db.VarChar(7) // Hex, e.g. #3B82F6
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @updatedAt @map("updated_at")
+
+  household Household @relation(fields: [householdId], references: [id], onDelete: Cascade)
+
+  @@unique([householdId, name, type])
+  @@index([householdId])
+  @@index([householdId, type])
+  @@map("categories")
+}
+
+model Transaction {
+  id                     String          @id @default(uuid()) @db.Uuid
+  householdId            String          @map("household_id") @db.Uuid
+  type                   TransactionType @default(INCOME) // Tipo de transação: INCOME, EXPENSE, TRANSFER, ALLOCATION
+  accountId              String?         @map("account_id") @db.Uuid // Para INCOME/EXPENSE
+  categoryName           String?         @map("category_name") @db.VarChar(50) // Nullable para TRANSFER/ALLOCATION
+  amount                 Decimal         @db.Decimal(15, 2)
+  description            String?
+  date                   DateTime        @db.Date
+  notes                  String?
+  paid                   Boolean         @default(true) // Flag para indicar se a transação já foi paga/recebida
+  // Transfer fields
+  fromAccountId          String?         @map("from_account_id") @db.Uuid // Conta origem (para TRANSFER)
+  toAccountId            String?         @map("to_account_id") @db.Uuid // Conta destino (para TRANSFER)
+  // Allocation fields
+  relatedEntityId        String?         @map("related_entity_id") @db.Uuid // ID da entidade relacionada (ex: cartão de crédito para ALLOCATION)
+  // Recurring transaction reference
+  recurringTransactionId String?         @map("recurring_transaction_id") @db.Uuid
+  // Installment fields
+  installmentId          String?         @map("installment_id")
+  installmentNumber      Int?            @map("installment_number")
+  totalInstallments      Int?            @map("total_installments")
+  attachmentUrl          String?         @map("attachment_url")
+  // Split expense fields
+  isSplit                Boolean         @default(false) @map("is_split") // Indica se a transação é dividida entre membros
+  createdAt              DateTime        @default(now()) @map("created_at")
+  updatedAt              DateTime        @updatedAt @map("updated_at")
+
+  // Relations
+  household            Household             @relation(fields: [householdId], references: [id], onDelete: Cascade)
+  account              Account?              @relation("TransactionAccount", fields: [accountId], references: [id], onDelete: SetNull)
+  fromAccount          Account?              @relation("TransactionFromAccount", fields: [fromAccountId], references: [id], onDelete: SetNull)
+  toAccount            Account?              @relation("TransactionToAccount", fields: [toAccountId], references: [id], onDelete: SetNull)
+  relatedAccount       Account?              @relation("TransactionRelatedAccount", fields: [relatedEntityId], references: [id], onDelete: SetNull)
+  recurringTransaction RecurringTransaction? @relation(fields: [recurringTransactionId], references: [id], onDelete: SetNull)
+  splits                TransactionSplit[]    // Divisões da transação entre membros
+
+  // Indexes for common queries
+  @@index([householdId])
+  @@index([householdId, date])
+  @@index([householdId, categoryName])
+  @@index([householdId, type])
+  @@index([accountId])
+  @@index([fromAccountId])
+  @@index([toAccountId])
+  @@index([relatedEntityId])
+  @@index([date])
+  @@index([recurringTransactionId])
+  @@index([installmentId])
+  @@map("transactions")
+}
+
+// ============================================================================
+// BUDGETING & GOALS
+// ============================================================================
+
+model Budget {
+  id           String       @id @default(uuid()) @db.Uuid
+  householdId  String       @map("household_id") @db.Uuid
+  categoryName String       @map("category_name") @db.VarChar(50)
+  monthlyLimit Decimal      @map("monthly_limit") @db.Decimal(15, 2)
+  month        DateTime     @db.Date // Month this budget applies to (start of month)
+  type         CategoryType // INCOME or EXPENSE
+  createdAt    DateTime     @default(now()) @map("created_at")
+  updatedAt    DateTime     @updatedAt @map("updated_at")
+
+  // Relations
+  household Household @relation(fields: [householdId], references: [id], onDelete: Cascade)
+
+  // One budget per category per household per month
+  @@unique([householdId, categoryName, month])
+  @@index([householdId])
+  @@index([householdId, month])
+  @@map("budgets")
+}
+
+model SavingsGoal {
+  id            String    @id @default(uuid()) @db.Uuid
+  householdId   String    @map("household_id") @db.Uuid
+  accountId     String?   @map("account_id") @db.Uuid
+  name          String
+  targetAmount  Decimal   @map("target_amount") @db.Decimal(15, 2)
+  currentAmount Decimal   @default(0) @map("current_amount") @db.Decimal(15, 2)
+  targetDate    DateTime? @map("target_date") @db.Date
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  // Relations
+  household Household @relation(fields: [householdId], references: [id], onDelete: Cascade)
+  account   Account?  @relation(fields: [accountId], references: [id], onDelete: SetNull)
+
+  // Indexes
+  @@index([householdId])
+  @@index([accountId])
+  @@map("savings_goals")
+}
+
+// ============================================================================
+// RECURRING TRANSACTIONS
+// ============================================================================
+
+enum RecurrenceFrequency {
+  DAILY
+  WEEKLY
+  BIWEEKLY
+  MONTHLY
+  YEARLY
+}
+
+model RecurringTransaction {
+  id           String              @id @default(uuid()) @db.Uuid
+  householdId  String              @map("household_id") @db.Uuid
+  accountId    String              @map("account_id") @db.Uuid
+  categoryName String              @map("category_name") @db.VarChar(50)
+  amount       Decimal             @db.Decimal(15, 2)
+  description  String?
+  frequency    RecurrenceFrequency
+  startDate    DateTime            @map("start_date") @db.Date
+  endDate      DateTime?           @map("end_date") @db.Date
+  nextRunAt    DateTime            @map("next_run_at") @db.Date
+  lastRunDate  DateTime?           @map("last_run_date") @db.Date
+  isActive     Boolean             @default(true) @map("is_active")
+  createdAt    DateTime            @default(now()) @map("created_at")
+  updatedAt    DateTime            @updatedAt @map("updated_at")
+
+  // Relations
+  household    Household     @relation(fields: [householdId], references: [id], onDelete: Cascade)
+  account      Account       @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+
+  // Indexes
+  // REGRA DE NEGÓCIO: Índice em nextRunAt para otimizar busca do cronjob
+  // O cronjob busca apenas recorrências com nextRunAt <= hoje
+  @@index([householdId])
+  @@index([nextRunAt])
+  @@index([isActive, nextRunAt])
+  @@map("recurring_transactions")
+}
+
+// ============================================================================
+// TRANSACTION SPLIT (Expense Sharing)
+// ============================================================================
+
+model TransactionSplit {
+  id            String    @id @default(uuid()) @db.Uuid
+  transactionId String    @map("transaction_id") @db.Uuid
+  userId        String    @map("user_id") @db.Uuid
+  amount        Decimal   @db.Decimal(15, 2) // Valor que este usuário deve pagar
+  paid          Boolean   @default(false) // Se já foi pago
+  paidAt        DateTime? @map("paid_at") // Data do pagamento
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  // Relations
+  transaction Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Indexes
+  @@unique([transactionId, userId]) // Um usuário só pode ter uma divisão por transação
+  @@index([transactionId])
+  @@index([userId])
+  @@index([paid])
+  @@map("transaction_splits")
+}
+
+// ============================================================================
+// USER FEEDBACK
+// ============================================================================
+
+model UserFeedback {
+  id              String   @id @default(uuid()) @db.Uuid
+  email           String
+  score           Int // 1 to 5 stars
+  feedbackContent String?  @map("feedback_content") @db.Text
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  @@index([email])
+  @@index([createdAt])
+  @@map("user_feedback")
+}
+
+// ============================================================================
+// REFERRALS
+// ============================================================================
+
+model Referral {
+  id           String   @id @default(uuid()) @db.Uuid
+  referrerId   String   @map("referrer_id") @db.Uuid // User who referred
+  referredId   String   @map("referred_id") @db.Uuid // User who was referred
+  referralCode String   @map("referral_code") @db.VarChar(20) // The code used
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  // Relations
+  referrer User @relation("Referrer", fields: [referrerId], references: [id], onDelete: Cascade)
+  referred User @relation("Referred", fields: [referredId], references: [id], onDelete: Cascade)
+
+  // One referral per referred user (prevent duplicates)
+  @@unique([referredId])
+  @@index([referrerId])
+  @@index([referredId])
+  @@index([referralCode])
+  @@map("referrals")
+}
+
+// ============================================================================
+// NOTIFICATIONS
+// ============================================================================
+
+enum NotificationType {
+  HOUSEHOLD_INVITE
+  BUDGET_ALERT
+  TRANSACTION_REMINDER
+  GOAL_UPDATE
+  // Future types can be added here
+}
+
+enum NotificationStatus {
+  UNREAD
+  READ
+  ARCHIVED
+}
+
+model Notification {
+  id          String             @id @default(uuid()) @db.Uuid
+  userId      String             @map("user_id") @db.Uuid
+  type        NotificationType
+  status      NotificationStatus @default(UNREAD)
+  title       String
+  message     String
+  metadata    Json?              // Flexible data for different notification types (e.g., { inviteId, householdId, etc. })
+  deepLink    String?            @map("deep_link") // Deep link URL (e.g., /app/notifications/:id or /households/:id/invites/:inviteId)
+  readAt      DateTime?          @map("read_at")
+  archivedAt  DateTime?          @map("archived_at")
+  createdAt   DateTime           @default(now()) @map("created_at")
+  updatedAt   DateTime           @updatedAt @map("updated_at")
+  expiresAt   DateTime?          @map("expires_at") // Optional expiration (for invites, etc.)
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Indexes
+  @@index([userId])
+  @@index([userId, status])
+  @@index([userId, type])
+  @@index([status])
+  @@index([type])
+  @@index([createdAt])
+  @@map("notifications")
+}

@@ -1,0 +1,1963 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-01-06T12:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:v2023.5.8",
+  "resources": [
+    {
+      "_id": "fld_root",
+      "parentId": null,
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "name": "Recta Backend API",
+      "description": "Personal finance backend API collection",
+      "environment": {
+        "base_url": "http://localhost:3000",
+        "firebase_token": "YOUR_FIREBASE_ID_TOKEN_HERE",
+        "household_id": "YOUR_HOUSEHOLD_ID_HERE",
+        "account_id": "YOUR_ACCOUNT_ID_HERE",
+        "account_id_2": "YOUR_SECOND_ACCOUNT_ID_HERE",
+        "category_id": "YOUR_CATEGORY_ID_HERE",
+        "transaction_id": "YOUR_TRANSACTION_ID_HERE",
+        "transaction_id_2": "YOUR_SECOND_TRANSACTION_ID_HERE",
+        "budget_id": "YOUR_BUDGET_ID_HERE",
+        "savings_goal_id": "YOUR_SAVINGS_GOAL_ID_HERE",
+        "recurring_transaction_id": "YOUR_RECURRING_TRANSACTION_ID_HERE",
+        "payment_intent_id": "YOUR_PAYMENT_INTENT_ID_HERE",
+        "customer_id": "YOUR_CUSTOMER_ID_HERE",
+        "member_id": "YOUR_MEMBER_ID_HERE"
+      },
+      "environmentPropertyOrder": [
+        "base_url",
+        "firebase_token",
+        "household_id",
+        "account_id",
+        "account_id_2",
+        "category_id",
+        "transaction_id",
+        "transaction_id_2",
+        "budget_id",
+        "savings_goal_id",
+        "recurring_transaction_id",
+        "payment_intent_id",
+        "customer_id",
+        "member_id"
+      ],
+      "metaSortKey": -1704547200000,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_auth",
+      "parentId": "fld_root",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "name": "🔐 Authentication",
+      "description": "Authentication endpoints",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1704547200000,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_users",
+      "parentId": "fld_root",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "name": "👤 Users",
+      "description": "User management endpoints",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1704547200001,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_households",
+      "parentId": "fld_root",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "name": "🏠 Households",
+      "description": "Household management endpoints",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1704547200002,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_accounts",
+      "parentId": "fld_root",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "name": "💰 Accounts",
+      "description": "Account management endpoints",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1704547200003,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_categories",
+      "parentId": "fld_root",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "name": "📁 Categories",
+      "description": "Category management endpoints",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1704547200004,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_transactions",
+      "parentId": "fld_root",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "name": "💸 Transactions",
+      "description": "Transaction management endpoints",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1704547200005,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_budgets",
+      "parentId": "fld_root",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "name": "📊 Budgets",
+      "description": "Budget management endpoints",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1704547200006,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_savings_goals",
+      "parentId": "fld_root",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "name": "🎯 Savings Goals",
+      "description": "Savings goals management endpoints",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1704547200007,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_recurring",
+      "parentId": "fld_root",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "name": "🔄 Recurring Transactions",
+      "description": "Recurring transaction management endpoints",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1704547200008,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_payments",
+      "parentId": "fld_root",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "name": "💳 Payments (Stripe)",
+      "description": "Stripe payment integration endpoints",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1704547200009,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_health",
+      "parentId": "fld_root",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/health",
+      "name": "Health Check",
+      "description": "Check if the API is running",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1704547200000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_auth_me",
+      "parentId": "fld_auth",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/auth/me",
+      "name": "Get Current User",
+      "description": "Get current user info and households",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}",
+          "description": "Firebase ID Token"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_auth_sync",
+      "parentId": "fld_auth",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/auth/sync",
+      "name": "Sync Firebase User",
+      "description": "Sync Firebase user with database",
+      "method": "POST",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}",
+          "description": "Firebase ID Token"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200001,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_users_me",
+      "parentId": "fld_users",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/users/me",
+      "name": "Get My Profile",
+      "description": "Get current user info and preferences",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_users_preferences",
+      "parentId": "fld_users",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/users/me/preferences",
+      "name": "Update Preferences",
+      "description": "Update user preferences",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"displayName\": \"John Doe\",\n  \"theme\": \"dark\",\n  \"baseCurrency\": \"BRL\",\n  \"locale\": \"pt-BR\",\n  \"country\": \"BR\",\n  \"onboardingCompleted\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200001,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_users_referral",
+      "parentId": "fld_users",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/users/me/referral-code",
+      "name": "Get Referral Code",
+      "description": "Get or create referral code",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200002,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_households_list",
+      "parentId": "fld_households",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/households",
+      "name": "List Households",
+      "description": "List user's households",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_households_create",
+      "parentId": "fld_households",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/households",
+      "name": "Create Household",
+      "description": "Create a new household",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"My Family\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200001,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_households_get",
+      "parentId": "fld_households",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/households/{{ _.household_id }}",
+      "name": "Get Household",
+      "description": "Get household details",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200002,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_households_update",
+      "parentId": "fld_households",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/households/{{ _.household_id }}",
+      "name": "Update Household",
+      "description": "Update household (OWNER only)",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Updated Household Name\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200003,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_households_delete",
+      "parentId": "fld_households",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/households/{{ _.household_id }}",
+      "name": "Delete Household",
+      "description": "Delete household (OWNER only)",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200004,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_households_invite",
+      "parentId": "fld_households",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/households/{{ _.household_id }}/invite",
+      "name": "Invite Member",
+      "description": "Invite member to household (OWNER only)",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"member@example.com\",\n  \"role\": \"EDITOR\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200005,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_households_members",
+      "parentId": "fld_households",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/households/{{ _.household_id }}/members",
+      "name": "List Members",
+      "description": "List household members",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200006,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_households_member_update",
+      "parentId": "fld_households",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/households/{{ _.household_id }}/members/{{ _.member_id }}",
+      "name": "Update Member Role",
+      "description": "Update member role (OWNER only)",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"role\": \"EDITOR\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200007,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_households_member_delete",
+      "parentId": "fld_households",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/households/{{ _.household_id }}/members/{{ _.member_id }}",
+      "name": "Remove Member",
+      "description": "Remove member from household (OWNER only)",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200008,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_accounts_list",
+      "parentId": "fld_accounts",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/accounts?householdId={{ _.household_id }}",
+      "name": "List Accounts",
+      "description": "List accounts for a household",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_accounts_summary",
+      "parentId": "fld_accounts",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/accounts/summary?householdId={{ _.household_id }}",
+      "name": "Get Accounts Summary",
+      "description": "Get account summary by currency",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200001,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_accounts_create",
+      "parentId": "fld_accounts",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/accounts",
+      "name": "Create Account",
+      "description": "Create a new account (EDITOR+)",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"householdId\": \"{{ _.household_id }}\",\n  \"name\": \"Conta Corrente\",\n  \"type\": \"CHECKING\",\n  \"balance\": 1000.00,\n  \"currency\": \"BRL\",\n  \"color\": \"#3B82F6\",\n  \"icon\": \"wallet\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200002,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_accounts_get",
+      "parentId": "fld_accounts",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/accounts/{{ _.account_id }}",
+      "name": "Get Account",
+      "description": "Get account details",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200003,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_accounts_update",
+      "parentId": "fld_accounts",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/accounts/{{ _.account_id }}",
+      "name": "Update Account",
+      "description": "Update account (EDITOR+)",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Updated Account Name\",\n  \"color\": \"#10B981\",\n  \"isActive\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200004,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_accounts_delete",
+      "parentId": "fld_accounts",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/accounts/{{ _.account_id }}",
+      "name": "Delete Account",
+      "description": "Delete account (EDITOR+)",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200005,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_accounts_transfer",
+      "parentId": "fld_accounts",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/accounts/transfer",
+      "name": "Transfer Between Accounts",
+      "description": "Transfer money between accounts (EDITOR+)",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"fromAccountId\": \"{{ _.account_id }}\",\n  \"toAccountId\": \"{{ _.account_id_2 }}\",\n  \"amount\": 100.00,\n  \"description\": \"Transferência entre contas\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200006,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_accounts_adjust",
+      "parentId": "fld_accounts",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/accounts/{{ _.account_id }}/adjust-balance",
+      "name": "Adjust Balance",
+      "description": "Manually adjust account balance (EDITOR+)",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"newBalance\": 1500.00,\n  \"reason\": \"Ajuste manual\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200007,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_categories_list",
+      "parentId": "fld_categories",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/categories?householdId={{ _.household_id }}",
+      "name": "List Categories",
+      "description": "List categories for a household",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_categories_create",
+      "parentId": "fld_categories",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/categories",
+      "name": "Create Category",
+      "description": "Create a new category (EDITOR+)",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"householdId\": \"{{ _.household_id }}\",\n  \"name\": \"Alimentação\",\n  \"type\": \"EXPENSE\",\n  \"icon\": \"food\",\n  \"color\": \"#EF4444\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200001,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_categories_get",
+      "parentId": "fld_categories",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/categories/{{ _.category_id }}",
+      "name": "Get Category",
+      "description": "Get category details",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200002,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_categories_update",
+      "parentId": "fld_categories",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/categories/{{ _.category_id }}",
+      "name": "Update Category",
+      "description": "Update category (EDITOR+)",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Alimentação Atualizada\",\n  \"color\": \"#F59E0B\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200003,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_categories_delete",
+      "parentId": "fld_categories",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/categories/{{ _.category_id }}",
+      "name": "Delete Category",
+      "description": "Delete category (EDITOR+)",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200004,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_transactions_list",
+      "parentId": "fld_transactions",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/transactions?householdId={{ _.household_id }}&limit=20",
+      "name": "List Transactions",
+      "description": "List transactions with filters and pagination",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_transactions_summary",
+      "parentId": "fld_transactions",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/transactions/summary?householdId={{ _.household_id }}&month=2024-01",
+      "name": "Get Summary",
+      "description": "Get income/expense summary for a period",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200001,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_transactions_by_category",
+      "parentId": "fld_transactions",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/transactions/by-category?householdId={{ _.household_id }}&month=2024-01",
+      "name": "Spending by Category",
+      "description": "Get spending breakdown by category",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200002,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_transactions_create",
+      "parentId": "fld_transactions",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/transactions",
+      "name": "Create Transaction",
+      "description": "Create a new transaction (EDITOR+)",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"householdId\": \"{{ _.household_id }}\",\n  \"accountId\": \"{{ _.account_id }}\",\n  \"categoryId\": \"{{ _.category_id }}\",\n  \"amount\": -50.00,\n  \"description\": \"Compra no supermercado\",\n  \"date\": \"2024-01-15T00:00:00.000Z\",\n  \"paid\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200003,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_transactions_get",
+      "parentId": "fld_transactions",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/transactions/{{ _.transaction_id }}",
+      "name": "Get Transaction",
+      "description": "Get transaction details",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200004,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_transactions_update",
+      "parentId": "fld_transactions",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/transactions/{{ _.transaction_id }}",
+      "name": "Update Transaction",
+      "description": "Update transaction (EDITOR+)",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"amount\": -75.00,\n  \"description\": \"Compra atualizada\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200005,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_transactions_delete",
+      "parentId": "fld_transactions",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/transactions/{{ _.transaction_id }}",
+      "name": "Delete Transaction",
+      "description": "Delete transaction (EDITOR+)",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200006,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_transactions_batch_create",
+      "parentId": "fld_transactions",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/transactions/batch",
+      "name": "Batch Create Transactions",
+      "description": "Create multiple transactions at once (EDITOR+)",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"householdId\": \"{{ _.household_id }}\",\n  \"transactions\": [\n    {\n      \"accountId\": \"{{ _.account_id }}\",\n      \"categoryId\": \"{{ _.category_id }}\",\n      \"amount\": -30.00,\n      \"description\": \"Transação 1\",\n      \"date\": \"2024-01-15T00:00:00.000Z\",\n      \"paid\": true\n    },\n    {\n      \"accountId\": \"{{ _.account_id }}\",\n      \"categoryId\": \"{{ _.category_id }}\",\n      \"amount\": -20.00,\n      \"description\": \"Transação 2\",\n      \"date\": \"2024-01-16T00:00:00.000Z\",\n      \"paid\": true\n    }\n  ]\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200007,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_transactions_batch_delete",
+      "parentId": "fld_transactions",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/transactions/batch",
+      "name": "Batch Delete Transactions",
+      "description": "Delete multiple transactions (EDITOR+)",
+      "method": "DELETE",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"householdId\": \"{{ _.household_id }}\",\n  \"transactionIds\": [\n    \"{{ _.transaction_id }}\",\n    \"{{ _.transaction_id_2 }}\"\n  ]\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200008,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_budgets_list",
+      "parentId": "fld_budgets",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/budgets?householdId={{ _.household_id }}&month=2024-01",
+      "name": "List Budgets",
+      "description": "List budgets for a household and month",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_budgets_create",
+      "parentId": "fld_budgets",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/budgets",
+      "name": "Create Budget",
+      "description": "Create a new budget (EDITOR+)",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"householdId\": \"{{ _.household_id }}\",\n  \"categoryId\": \"{{ _.category_id }}\",\n  \"monthlyLimit\": 1000.00,\n  \"month\": \"2024-01-01T00:00:00.000Z\",\n  \"type\": \"EXPENSE\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200001,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_budgets_get",
+      "parentId": "fld_budgets",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/budgets/{{ _.budget_id }}",
+      "name": "Get Budget",
+      "description": "Get budget details with progress",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200002,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_budgets_update",
+      "parentId": "fld_budgets",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/budgets/{{ _.budget_id }}",
+      "name": "Update Budget",
+      "description": "Update budget (EDITOR+)",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"monthlyLimit\": 1500.00\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200003,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_budgets_delete",
+      "parentId": "fld_budgets",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/budgets/{{ _.budget_id }}",
+      "name": "Delete Budget",
+      "description": "Delete budget (EDITOR+)",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200004,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_savings_goals_list",
+      "parentId": "fld_savings_goals",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/savings-goals?householdId={{ _.household_id }}",
+      "name": "List Savings Goals",
+      "description": "List savings goals for a household",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_savings_goals_create",
+      "parentId": "fld_savings_goals",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/savings-goals",
+      "name": "Create Savings Goal",
+      "description": "Create a new savings goal (EDITOR+)",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"householdId\": \"{{ _.household_id }}\",\n  \"accountId\": \"{{ _.account_id }}\",\n  \"name\": \"Viagem para Europa\",\n  \"targetAmount\": 10000.00,\n  \"currentAmount\": 0.00,\n  \"targetDate\": \"2024-12-31T00:00:00.000Z\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200001,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_savings_goals_get",
+      "parentId": "fld_savings_goals",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/savings-goals/{{ _.savings_goal_id }}",
+      "name": "Get Savings Goal",
+      "description": "Get savings goal details",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200002,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_savings_goals_update",
+      "parentId": "fld_savings_goals",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/savings-goals/{{ _.savings_goal_id }}",
+      "name": "Update Savings Goal",
+      "description": "Update savings goal (EDITOR+)",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Viagem Atualizada\",\n  \"targetAmount\": 12000.00,\n  \"currentAmount\": 5000.00\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200003,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_savings_goals_delete",
+      "parentId": "fld_savings_goals",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/savings-goals/{{ _.savings_goal_id }}",
+      "name": "Delete Savings Goal",
+      "description": "Delete savings goal (EDITOR+)",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200004,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_savings_goals_add",
+      "parentId": "fld_savings_goals",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/savings-goals/{{ _.savings_goal_id }}/add",
+      "name": "Add to Savings Goal",
+      "description": "Add amount to savings goal (EDITOR+)",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"amount\": 500.00\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200005,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_recurring_list",
+      "parentId": "fld_recurring",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/recurring-transactions?householdId={{ _.household_id }}",
+      "name": "List Recurring Transactions",
+      "description": "List recurring transactions for a household",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_recurring_create",
+      "parentId": "fld_recurring",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/recurring-transactions",
+      "name": "Create Recurring Transaction",
+      "description": "Create a new recurring transaction (EDITOR+)",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"householdId\": \"{{ _.household_id }}\",\n  \"accountId\": \"{{ _.account_id }}\",\n  \"categoryId\": \"{{ _.category_id }}\",\n  \"amount\": -100.00,\n  \"description\": \"Aluguel\",\n  \"frequency\": \"MONTHLY\",\n  \"startDate\": \"2024-01-01T00:00:00.000Z\",\n  \"endDate\": null,\n  \"isActive\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200001,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_recurring_get",
+      "parentId": "fld_recurring",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/recurring-transactions/{{ _.recurring_transaction_id }}",
+      "name": "Get Recurring Transaction",
+      "description": "Get recurring transaction details",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200002,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_recurring_update",
+      "parentId": "fld_recurring",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/recurring-transactions/{{ _.recurring_transaction_id }}",
+      "name": "Update Recurring Transaction",
+      "description": "Update recurring transaction (EDITOR+)",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"amount\": -120.00,\n  \"isActive\": false\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200003,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_recurring_delete",
+      "parentId": "fld_recurring",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/recurring-transactions/{{ _.recurring_transaction_id }}",
+      "name": "Delete Recurring Transaction",
+      "description": "Delete recurring transaction (EDITOR+)",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200004,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_payments_intent_create",
+      "parentId": "fld_payments",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/payments/intents",
+      "name": "Create Payment Intent",
+      "description": "Create a Stripe payment intent",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"amount\": 100.00,\n  \"currency\": \"usd\",\n  \"description\": \"Premium subscription\",\n  \"metadata\": {\n    \"userId\": \"user-123\"\n  }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_payments_intent_get",
+      "parentId": "fld_payments",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/payments/intents/{{ _.payment_intent_id }}",
+      "name": "Get Payment Intent",
+      "description": "Get payment intent details",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200001,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_payments_intent_list",
+      "parentId": "fld_payments",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/payments/intents",
+      "name": "List Payment Intents",
+      "description": "List payment intents",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200002,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_payments_customer_create",
+      "parentId": "fld_payments",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/payments/customers",
+      "name": "Create Customer",
+      "description": "Create a Stripe customer",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"customer@example.com\",\n  \"name\": \"John Doe\",\n  \"metadata\": {\n    \"userId\": \"user-123\"\n  }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200003,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_payments_customer_get",
+      "parentId": "fld_payments",
+      "modified": 1704547200000,
+      "created": 1704547200000,
+      "url": "{{ _.base_url }}/payments/customers/{{ _.customer_id }}",
+      "name": "Get Customer",
+      "description": "Get customer details",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.firebase_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704547200004,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    }
+  ]
+}
